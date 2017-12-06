@@ -9,7 +9,7 @@ const cookieParser = require(`cookie-parser`);
 const bodyParser = require(`body-parser`);
 
 // Routes File
-const routesApi = require(`./app_api/routes.js`);
+const routesApi = require(`./routes.js`);
 
 ///////////////////////////////////
 // EXPRESS
@@ -30,11 +30,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, `public`)));
 app.use(express.static(path.join(__dirname, `app_client`)));
 
-// Initialise Passport (before using route middleware)
-app.use(passport.initialize());
-
-// Use API routes when path starts with /api
-app.use(`/api`, routesApi);
 // Else, render the index.html page for the Angular SPA
 app.use(function(req, res) {
   res.sendFile(path.join(__dirname, `app_client`, `index.html`));
