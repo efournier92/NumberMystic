@@ -22,13 +22,10 @@
     "morgan": "~1.5.1",
     "serve-favicon": "~2.2.0"
   },
-  "devDependencies": {
-
-  },
+  "devDependencies": {},
   "scripts": {
     "start": "node app.js"
   },
   "author": "Eric Fournier",
   "license": "MIT"
 }
-

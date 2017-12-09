@@ -1,12 +1,12 @@
 (function () {
 
-  angular.module('numberGuesser', []);
+  angular.module('numberGuesser', ['ngRoute']);
 
-  function config($routeProvider, $locationProvider) {
+  function config($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'guesser.view.html',
-        controller: 'guesser.controller',
+        controller: 'guesserCtrl',
       })
       .otherwise({redirectTo: '/'});
   }
