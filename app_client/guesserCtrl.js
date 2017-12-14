@@ -16,7 +16,7 @@ function guesserCtrl($scope) {
   $scope.startRange = $scope.knownRange;
   $scope.maxGuesses = undefined;
   $scope.userNum = undefined;
-  $scope.guessCount = 1;
+  $scope.guessCount = 0;
 
   $scope.calcMaxGuesses = function () {
     $scope.hasBegun = true;
@@ -28,18 +28,26 @@ function guesserCtrl($scope) {
 
   $scope.startTestingRanges = function () {
     $scope.testingRanges = true;
-    maxGuessRange = $scope.knownRange.max / 2
-    $scope.guessRange = new Range($scope.knownRange.min, maxGuessRange);
+    maxGuessRange = $scope.knownRange.max / 2;
   };
 
   $scope.getNewRange = function (isWithinRange) {
-    let middleNum = Math.ceil(($scope.knownRange.max - $scope.knownRange.min) / 2);
+    $scope.testingRanges = true;
+    $scope.guessCount += 1;
+    let middleNum = Math.ceil(($scope.knownRange.max + $scope.knownRange.min) / 2);
     $scope.guessRange = new Range($scope.knownRange.min, middleNum);
+    if (isWithinRange === undefined) return;
     if (isWithinRange) {
       $scope.knownRange = $scope.guessRange;
+      middleNum = Math.ceil(($scope.knownRange.max + $scope.knownRange.min) / 2);
+      $scope.guessRange = new Range($scope.knownRange.min, middleNum);
     } else {
-      let max = $scope.guessRange.max;
-      $scope.knownRange = new Range(max, max*2);
+      $scope.knownRange.min = $scope.guessRange.max;
+      middleNum = Math.ceil(($scope.knownRange.max + $scope.knownRange.min) / 2);
+      $scope.guessRange = new Range($scope.guessRange.max, middleNum);
+    }
+    if (($scope.knownRange.max - $scope.knownRange.min) <= 1) {
+      $scope.userNum = $scope.knownRange.max; 
     }
   }
 

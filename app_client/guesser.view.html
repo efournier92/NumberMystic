@@ -36,12 +36,12 @@
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <button type="button" class="btn btn-warning" style="width:61%" ng-click="startTestingRanges()">Okay</button>
+        <button type="button" class="btn btn-warning" style="width:61%" ng-click="getNewRange(undefined)">Okay</button>
       </div>
     </div>
   </div>
 
-  <div class="container" ng-show="testingRanges">
+  <div class="container" ng-show="testingRanges && !userNum">
     <div id="prompt-text" class="row">
       Is your number between <b>{{guessRange.min}}</b> &amp; <b>{{guessRange.max}}</b>?
     </div>
@@ -57,6 +57,7 @@
   <div class="container" ng-show="userNum">
     <div id="prompt-text" class="row">
       Your number is <b>{{userNum}}</b>!
+      It took <b>{{guessCount}} Guesses</b>
     </div>
   </div>
 </div>
