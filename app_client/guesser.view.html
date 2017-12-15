@@ -1,9 +1,9 @@
-<div id="main-container" class="container">
-  <h1>
-    Number Guesser
-  </h1>
-
-  <div id="range-form" ng-hide="hasBegun">
+<h1 class="container">
+  Number Guesser
+</h1>
+<div id="main-container" class="container" style="height:300px;padding-top:20px">
+  <div class="row"></div>
+  <div id="range-form" ng-show="step === 'getRangeInput'">
     <div class="form-group row">
       <div id="prompt-text" class="col-sm-12">
         Please Input a Number Range
@@ -11,27 +11,27 @@
     </div>
     <div class="col-sm-3 col-sm-offset-2">
       <input type="number" class="form-control form-control-lg" 
-      ng-model="knownRange.min">
+                           ng-model="knownRange.min">
     </div>
     <div class="col-sm-2" style="font-size:32px;top:-8px">
       -
     </div>
     <div class="col-sm-3">
       <input class="form-control form-control-lg" 
-      type="number" ng-model="knownRange.max">
+             type="number" ng-model="knownRange.max">
     </div>
     <div class="col-sm-12">
       <button type="button" class="btn btn-success" style="width:61%" ng-click="calcMaxGuesses()">Begin</button>
     </div>
   </div>
 
-  <div id="range-form" ng-show="hasBegun && !testingRanges">
+  <div id="range-form" ng-show="step === 'chooseNumber'">
     <div class="form-group row">
       <div id="prompt-text" class="col-sm-12">
         Think of a number between {{knownRange.min}} &amp; {{knownRange.max}}
       </div>
       <div id="prompt-text" class="col-sm-12">
-        I can guess it in {{maxGuesses}} Tries
+        I can find it With {{maxGuesses}} Questions
       </div>
     </div>
     <div class="row">
@@ -41,7 +41,7 @@
     </div>
   </div>
 
-  <div class="container" ng-show="testingRanges && !userNum">
+  <div class="container" ng-show="step === 'guessRanges'">
     <div id="prompt-text" class="row">
       Is your number between <b>{{guessRange.min}}</b> &amp; <b>{{guessRange.max}}</b>?
     </div>
@@ -50,15 +50,18 @@
       <button type="button" class="btn btn-lg btn-danger" ng-click="getNewRange(false)">No</button>
     </div>
     <div id="prompt-text" class="row">
-      Guess {{guessCount}} of {{maxGuesses}}
+      Question {{guessCount}} of {{maxGuesses}}
     </div>
   </div>
 
-  <div class="container" ng-show="userNum">
+  <div class="container" ng-show="step === 'showFinalAnswer'">
     <div id="prompt-text" class="row">
-      Your number is <b>{{userNum}}</b>!
-      It took <b>{{guessCount}} Guesses</b>
     </div>
+    Your number is <b>{{finalAnswer}}</b><br />
   </div>
+  <div id="prompt-text" class="col-sm-12">
+    It took me <b>{{guessCount}} Questions</b>
+  </div>
+</div>
 </div>
 
