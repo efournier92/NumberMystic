@@ -1,8 +1,4 @@
-angular
-  .module('numberGuesser')
-  .controller('guesserCtrl', guesserCtrl);
-
-function guesserCtrl($scope) {
+const guesserCtrl = function guesserCtrl($scope) {
 
   class Range {
     constructor(min, max) {
@@ -57,4 +53,6 @@ function guesserCtrl($scope) {
   }
 
 };
+
+export {guesserCtrl}
 
