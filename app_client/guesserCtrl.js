@@ -11,17 +11,23 @@ function guesserCtrl($scope) {
     }
   }
 
-  $scope.step = `getRangeInput`
+  function findMiddleNumber(range) {
+    return Math.ceil(
+      (range.min + range.max) / 2
+    )
+  }
 
-  $scope.hasBegun = false;
-  $scope.testingRanges = false;
-  $scope.knownRange = new Range(0, 100);
-  $scope.startRange = $scope.knownRange;
-  $scope.maxGuesses = undefined;
-  $scope.finalAnswer = undefined;
-  $scope.guessCount = 0;
+  $scope.start = () => {
+    $scope.step = `getRangeInput`;
+    $scope.knownRange = new Range(0, 100);
+    $scope.maxGuesses = undefined;
+    $scope.finalAnswer = undefined;
+    $scope.guessCount = 0;
+  }
 
-  $scope.calcMaxGuesses = function () {
+  $scope.start();
+  
+  $scope.calcMaxGuesses = () => {
     let range = $scope.knownRange.max - $scope.knownRange.min;
     let numLog = Math.log(range);
     let numFloor = Math.floor(numLog);
@@ -29,13 +35,7 @@ function guesserCtrl($scope) {
     $scope.step = `chooseNumber`;
   };
 
-  function findMiddleNumber(range) {
-    return Math.ceil(
-      (range.min + range.max) / 2
-    )
-  }
-
-  $scope.getNewRange = function (isWithinRange) {
+  $scope.getNewRange = (isWithinRange) => {
     $scope.guessCount += 1;
     if (isWithinRange === undefined) {
       $scope.step = `guessRanges`;

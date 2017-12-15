@@ -1,32 +1,91 @@
 body {
-  background-color: #231f20;
+  height: 100vh;
+  background-color: #212121;
   color: white;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content:center;
 }
 
 input {
   text-align: center;
 }
 
-h1 {
+b {
+  width: 100%;
+}
+
+#header {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background-color: #343d46;
   font-size: 50px;
-  margin-bottom: 32px; 
-  text-decoration: underline;
-  font-weight: bold;
+  height: 90px;
+  /* font-weight: bold; */
+  width: 100%;
+  /* padding: 10px; */
+  margin: 0px;
+  border-bottom: 2px solid #a7adba;
+}
+
+#main-container {
+  align-self: center;
+  width: 50%;
+  height: 465px;
+  margin-bottom: 6%;
+  text-align: center;
+  background-color: #65737e;
+  border: solid 2px #a7adba;
+  line-height: 40%;
+}
+
+#form-dash {
+  font-size: 32px;
+  margin-top: 11px;
+}
+
+.main-sub-container {
+  height: 375px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 50px;
+}
+
+.sub-text-container {
+  padding: 12px;
+  height: 375px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.prompt-text {
+  font-size: 28px;
+  width: 100%;
+}
+
+.big-button {
+  width: 60%;
+}
+
+.btn {
+  margin: 16px;
 }
 
 .container {
   width: 60%;
+  padding: 0px;
 }
 
-#main-container {
-  width: 50%;
-  height: 85vh;
-  text-align: center;
-  background-color: #65737e;
-  margin-top: 5%;
-}
-
-#prompt-text {
-  font-size: 28px;
+.row {
+  width: 100%;
+  padding: 2%;
 }
 
