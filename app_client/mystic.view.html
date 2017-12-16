@@ -1,7 +1,7 @@
 <div id="main-container" class="container" style="line-height:40%">
 
   <h1 id="header">
-    Number Guesser
+    Number Mystic
   </h1>
 
   <div class="main-sub-container" ng-show="step === 'getRangeInput'">
@@ -12,21 +12,21 @@
         </div>
       </div>
       <div class="form-group">
-        <div class="col-sm-3 col-sm-offset-2 align-middle">
+        <div class="col-sm-4 col-sm-offset-1 align-middle">
           <input type="number" class="form-control form-control-lg" 
-          ng-model="knownRange.min">
+                               ng-model="knownRange.min">
         </div>
         <div id="form-dash" class="col-sm-2">
           -
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
           <input class="form-control form-control-lg" 
-          type="number"
-          ng-model="knownRange.max">
+                 type="number"
+                 ng-model="knownRange.max">
         </div>
       </div>
       <div class="col-sm-12">
-        <button type="button" class="btn big-button btn-success" style="width:61%" ng-click="calcMaxGuesses()">Begin</button>
+        <button type="button" class="btn big-button btn-success" style="width:61%" ng-click="calcMaxQuestions()">Begin</button>
       </div>
     </div>
   </div>
@@ -45,7 +45,7 @@
       </div>
       <div class="form-group row">
         <div class="prompt-text" class="col-sm-12">
-          I can find it with <b>{{maxGuesses}}</b> Questions
+          I Can Find It In <b>{{maxQuestions}}</b> Questions or Less!
         </div>
       </div>
       <div class="col-sm-12">
@@ -54,11 +54,11 @@
     </div>
   </div>
 
-  <div class="main-sub-container" ng-show="step === 'guessRanges'">
+  <div class="main-sub-container" ng-show="step === 'askQuestions'">
     <div class="sub-text-container">
       <div class="form-group row">
         <div class="prompt-text" class="col-sm-12">
-          Is your number between <b>{{guessRange.min}}</b> &amp; <b>{{guessRange.max}}</b>?
+          Is your number between <b>{{askRange.min}}</b> &amp; <b>{{askRange.max}}</b>?
         </div>
       </div>
       <div class="form-group row">
@@ -69,7 +69,7 @@
       </div>
       <div class="form-group row">
         <div class="prompt-text" class="col-sm-12">
-          Question {{guessCount}} of {{maxGuesses}}
+          Question {{questionCount}} of {{maxQuestions}}
         </div>
       </div>
     </div>
@@ -84,14 +84,14 @@
       </div>
       <div class="form-group row">
         <div class="prompt-text" class="col-sm-12">
-          It took me <b>{{guessCount}}</n> Questions
-          </div>
-        </div>
-        <div class="col-sm-12 row">
-          <button type="button" class="btn big-button btn-success" ng-click="start()">Play Again?</button>
+          It took me <b>{{questionCount}}</b> Questions
         </div>
       </div>
+      <div class="col-sm-12 row">
+        <button type="button" class="btn big-button btn-success" ng-click="start()">Try Again?</button>
+      </div>
     </div>
-
   </div>
+
+</div>
 

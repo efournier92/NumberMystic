@@ -63,12 +63,15 @@ b {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
 }
 
 .prompt-text {
   font-size: 28px;
   width: 100%;
+}
+
+.number-input {
+  width: 160px;
 }
 
 .big-button {

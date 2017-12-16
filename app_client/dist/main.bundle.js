@@ -70,16 +70,16 @@
 "use strict";
 
 
-var _guesserCtrl = __webpack_require__(1);
+var _mysticController = __webpack_require__(1);
+
+angular.module('numberMystic', ['ngRoute']).config(['$routeProvider', config]).controller('mysticCtrl', _mysticController.mysticCtrl);
 
 function config($routeProvider) {
   $routeProvider.when('/', {
-    templateUrl: 'guesser.view.html',
-    controller: 'guesserCtrl'
+    templateUrl: 'mystic.view.html',
+    controller: 'mysticCtrl'
   }).otherwise({ redirectTo: '/' });
 }
-
-angular.module('numberGuesser').config(['$routeProvider', config]).controller('guesserCtrl', _guesserCtrl.guesserCtrl);
 
 /***/ }),
 /* 1 */
@@ -94,7 +94,7 @@ Object.defineProperty(exports, "__esModule", {
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var guesserCtrl = function guesserCtrl($scope) {
+var mysticCtrl = function mysticCtrl($scope) {
   var Range = function Range(min, max) {
     _classCallCheck(this, Range);
 
@@ -109,44 +109,47 @@ var guesserCtrl = function guesserCtrl($scope) {
   $scope.start = function () {
     $scope.step = 'getRangeInput';
     $scope.knownRange = new Range(0, 100);
-    $scope.maxGuesses = undefined;
-    $scope.finalAnswer = undefined;
-    $scope.guessCount = 0;
+    $scope.questionCount = 0;
   };
 
   $scope.start();
 
-  $scope.calcMaxGuesses = function () {
+  $scope.calcMaxQuestions = function () {
+    // 1 + Floor(log2( n ))
+    // find the number range
     var range = $scope.knownRange.max - $scope.knownRange.min;
-    var numLog = Math.log(range);
-    var numFloor = Math.floor(numLog);
-    $scope.maxGuesses = numFloor + 1;
+    // calculate log base 2 of the range
+    var numLog = Math.log2(range);
+    // round down to nearest integer & add 1
+    $scope.maxQuestions = Math.floor(numLog) + 1;
     $scope.step = 'chooseNumber';
   };
 
   $scope.getNewRange = function (isWithinRange) {
-    $scope.guessCount += 1;
     if (isWithinRange === undefined) {
-      $scope.step = 'guessRanges';
+      $scope.step = 'askQuestions';
       var middleNumber = findMiddleNumber($scope.knownRange);
-      $scope.guessRange = new Range($scope.knownRange.min, middleNumber);
+      $scope.askRange = new Range($scope.knownRange.min, middleNumber);
     } else if (isWithinRange) {
-      $scope.knownRange = $scope.guessRange;
+      $scope.knownRange = $scope.askRange;
       var _middleNumber = findMiddleNumber($scope.knownRange);
-      $scope.guessRange = new Range($scope.knownRange.min, _middleNumber);
+      $scope.askRange = new Range($scope.knownRange.min, _middleNumber);
     } else {
-      $scope.knownRange.min = $scope.guessRange.max;
+      $scope.knownRange.min = $scope.askRange.max;
       var _middleNumber2 = findMiddleNumber($scope.knownRange);
-      $scope.guessRange = new Range($scope.guessRange.max, _middleNumber2);
+      $scope.askRange = new Range($scope.askRange.max, _middleNumber2);
     }
+
     if ($scope.knownRange.max - $scope.knownRange.min <= 1) {
       $scope.step = 'showFinalAnswer';
       $scope.finalAnswer = $scope.knownRange.max;
+    } else {
+      $scope.questionCount += 1;
     }
   };
 };
 
-exports.guesserCtrl = guesserCtrl;
+exports.mysticCtrl = mysticCtrl;
 
 /***/ })
 /******/ ]);

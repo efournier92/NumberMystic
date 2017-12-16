@@ -1,5 +1,5 @@
 // Core Dependencies
-var gulp = require('gulp');
+const gulp = require('gulp');
 var path = require('path');
 
 // Convert ES6 to ES5
