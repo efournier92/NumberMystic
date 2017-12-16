@@ -78,7 +78,7 @@ function config($routeProvider) {
   $routeProvider.when('/', {
     templateUrl: 'mystic.view.html',
     controller: 'mysticCtrl'
-  }).otherwise({ redirectTo: '/' });
+  });
 }
 
 /***/ }),
