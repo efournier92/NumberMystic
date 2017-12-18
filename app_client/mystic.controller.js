@@ -16,11 +16,12 @@ const mysticCtrl = function mysticCtrl($scope) {
   $scope.start = () => {
     $scope.step = `getRangeInput`;
     $scope.knownRange = new Range(0, 100);
+    $scope.askSingleNumber = false;
     $scope.questionCount = 0;
   }
 
   $scope.start();
-  
+
   $scope.calcMaxQuestions = () => {
     // 1 + Floor(log2( n ))
     // find the number range
@@ -47,13 +48,23 @@ const mysticCtrl = function mysticCtrl($scope) {
       $scope.askRange = new Range($scope.askRange.max, middleNumber);
     }
 
-    if ($scope.knownRange.max - $scope.knownRange.min <= 1) {
-      $scope.step = 'showFinalAnswer'
-      $scope.finalAnswer = $scope.knownRange.max;
+    if ($scope.knownRange.max - $scope.knownRange.min <= 2) {
+      if ($scope.knownRange.max === $scope.knownRange.min && isWithinRange === true) {
+        $scope.step = 'showFinalAnswer'
+        $scope.finalAnswer = $scope.knownRange.max;
+      } else if ($scope.knownRange.max === $scope.knownRange.min && isWithinRange === false) {
+        $scope.step = 'showFinalAnswer'
+        $scope.finalAnswer = $scope.knownRange.max - 1;
+      } else {
+        $scope.askSingleNumber = true;
+        $scope.askRange.max = $scope.knownRange.max;
+        $scope.askRange.min = $scope.knownRange.max;
+        $scope.questionCount += 1;
+      }
     } else {
       $scope.questionCount += 1;
     }
-  }
+  };
 
 };
 

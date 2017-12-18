@@ -109,6 +109,7 @@ var mysticCtrl = function mysticCtrl($scope) {
   $scope.start = function () {
     $scope.step = 'getRangeInput';
     $scope.knownRange = new Range(0, 100);
+    $scope.askSingleNumber = false;
     $scope.questionCount = 0;
   };
 
@@ -140,9 +141,19 @@ var mysticCtrl = function mysticCtrl($scope) {
       $scope.askRange = new Range($scope.askRange.max, _middleNumber2);
     }
 
-    if ($scope.knownRange.max - $scope.knownRange.min <= 1) {
-      $scope.step = 'showFinalAnswer';
-      $scope.finalAnswer = $scope.knownRange.max;
+    if ($scope.knownRange.max - $scope.knownRange.min <= 2) {
+      if ($scope.knownRange.max === $scope.knownRange.min && isWithinRange === true) {
+        $scope.step = 'showFinalAnswer';
+        $scope.finalAnswer = $scope.knownRange.max;
+      } else if ($scope.knownRange.max === $scope.knownRange.min && isWithinRange === false) {
+        $scope.step = 'showFinalAnswer';
+        $scope.finalAnswer = $scope.knownRange.max - 1;
+      } else {
+        $scope.askSingleNumber = true;
+        $scope.askRange.max = $scope.knownRange.max;
+        $scope.askRange.min = $scope.knownRange.max;
+        $scope.questionCount += 1;
+      }
     } else {
       $scope.questionCount += 1;
     }
