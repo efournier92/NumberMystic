@@ -16,9 +16,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// const favicon = require(`serve-favicon`);
-// app.use(favicon(__dirname + `/public/logo.png`));
-
 // Static Resources
 app.use(express.static(path.join(__dirname, `public`)));
 app.use(express.static(path.join(__dirname, `app_client`)));
