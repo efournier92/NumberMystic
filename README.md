@@ -11,9 +11,9 @@
 * ECMAScript 2015 (ES6)
 
 ## Tech Stack
-* **Back-End:** NodeJS _v6.11.3_
-* **Back-End Framework:** _ExpressJS v4.11.1_
-* **Front-End:** AngularJS _v1.5.6_
+* Back-End: **NodeJS** v_6.11.3_
+* Back-End Framework: **ExpressJS** v_4.11.1_
+* Front-End: **AngularJS** v_1.5.6_
 
 ## Tools
 * Gulp
