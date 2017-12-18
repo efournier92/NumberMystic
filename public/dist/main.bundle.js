@@ -141,7 +141,7 @@ var mysticCtrl = function mysticCtrl($scope) {
       $scope.askRange = new Range($scope.askRange.max, _middleNumber2);
     }
 
-    if ($scope.knownRange.max - $scope.knownRange.min <= 2) {
+    if ($scope.askRange.max - $scope.askRange.min <= 1) {
       if ($scope.knownRange.max === $scope.knownRange.min && isWithinRange === true) {
         $scope.step = 'showFinalAnswer';
         $scope.finalAnswer = $scope.knownRange.max;

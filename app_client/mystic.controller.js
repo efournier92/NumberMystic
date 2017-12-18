@@ -48,11 +48,11 @@ const mysticCtrl = function mysticCtrl($scope) {
       $scope.askRange = new Range($scope.askRange.max, middleNumber);
     }
 
-    if ($scope.knownRange.max - $scope.knownRange.min <= 2) {
-      if ($scope.knownRange.max === $scope.knownRange.min && isWithinRange === true) {
+    if ($scope.askRange.max - $scope.askRange.min <= 1) {
+      if ($scope.askRange.max === $scope.askRange.min && isWithinRange === true) {
         $scope.step = 'showFinalAnswer'
-        $scope.finalAnswer = $scope.knownRange.max;
-      } else if ($scope.knownRange.max === $scope.knownRange.min && isWithinRange === false) {
+        $scope.finalAnswer = $scope.askRange.max;
+      } else if ($scope.askRange.max === $scope.askRange.min && isWithinRange === false) {
         $scope.step = 'showFinalAnswer'
         $scope.finalAnswer = $scope.knownRange.max - 1;
       } else {
