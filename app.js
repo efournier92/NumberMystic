@@ -16,6 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+// Serve Fav Icon
 const favicon = require(`serve-favicon`);
 app.use(favicon(__dirname + `/public/mystic.png`));
 
