@@ -103,13 +103,14 @@ var mysticCtrl = function mysticCtrl($scope) {
   };
 
   function findMiddleNumber(range) {
-    return Math.ceil((range.min + range.max) / 2);
+    return Math.floor((range.min + range.max) / 2);
   }
 
   $scope.start = function () {
     $scope.step = 'getRangeInput';
     $scope.knownRange = new Range(0, 100);
     $scope.askingSingleNumber = false;
+    $scope.upperOfThree = undefined;
     $scope.questionCount = 0;
   };
 
@@ -130,14 +131,35 @@ var mysticCtrl = function mysticCtrl($scope) {
 
   $scope.getNewRange = function (isWithinRange) {
     $scope.questionCount += 1;
-    if ($scope.threeNumbersRemaining) {
+
+    if ($scope.knownRange.max === $scope.knownRange.min) {
+      $scope.finalAnswer = $scope.askRange.max;
+      $scope.questionCount -= 1;
+      $scope.step = 'showFinalAnswer';
+      return;
+    }
+
+    if ($scope.askingSingleNumber) {
+      if (isWithinRange) {
+        $scope.finalAnswer = $scope.askRange.max;
+      } else {
+        $scope.finalAnswer = $scope.askRange.min;
+      }
+      $scope.step = 'showFinalAnswer';
+      $scope.questionCount -= 1;
+      return;
+    }
+
+    if ($scope.upperOfThree) {
       if (isWithinRange) {
         $scope.askingSingleNumber = true;
-      } else if (isWithinRange) {
-        $scope.finalAnswer = $scope.upperNumberRemaining;
+      } else {
         $scope.step = 'showFinalAnswer';
+        $scope.questionCount -= 1;
+        $scope.finalAnswer = $scope.upperOfThree;
       }
     }
+
     if (isWithinRange === undefined) {
       $scope.step = 'askQuestions';
       var middleNumber = findMiddleNumber($scope.knownRange);
@@ -149,25 +171,19 @@ var mysticCtrl = function mysticCtrl($scope) {
     } else if (!isWithinRange && !$scope.askingSingleNumber) {
       $scope.knownRange.min = $scope.askRange.max;
       var _middleNumber2 = findMiddleNumber($scope.knownRange);
-      $scope.askRange = new Range($scope.askRange.max + 1, _middleNumber2);
+      $scope.askRange = new Range($scope.askRange.max, _middleNumber2);
     }
 
-    if ($scope.askingSingleNumber) {
-      $scope.questionCount -= 1;
+    if ($scope.knownRange.max === $scope.knownRange.min) {
       $scope.step = 'showFinalAnswer';
-      if (isWithinRange) {
-        $scope.finalAnswer = $scope.upperNumberRemaining;
-      } else {
-        $scope.finalAnswer = $scope.askRange.min;
-      }
-    }
-
-    if ($scope.askRange.max - $scope.askRange.min === 2) {
-      $scope.threeNumbersRemaining = true;
-      $scope.upperNumberRemaining = $scope.askRange.max;
-      $scope.askRange.max = $scope.askRange.min + 1;
-    } else if ($scope.askRange.max - $scope.askRange.min == 1) {
+      $scope.finalAnswer = $scope.askRange.max;
+    } else if ($scope.knownRange.max - $scope.knownRange.min === 2) {
+      $scope.upperOfThree = $scope.knownRange.max;
+      $scope.askRange.max = $scope.knownRange.min + 1;
+      $scope.askRange.min = $scope.knownRange.min;
+    } else if ($scope.knownRange.max - $scope.knownRange.min === 1) {
       $scope.askingSingleNumber = true;
+      $scope.askRange = $scope.knownRange;
     }
   };
 };
