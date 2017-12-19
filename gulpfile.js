@@ -28,6 +28,11 @@ gulp.task('transpile-es6', () => {
     .pipe(gulp.dest('./public/dist/'))
 });
 
+// Watch Files For Changes
+gulp.task('watch', function () {
+  gulp.watch('./app_client/*.js', ['transpile-es6']);
+});
+
 // Default Task
-gulp.task('default', ['transpile-es6']);
+gulp.task('default', ['transpile-es6', 'watch']);
 

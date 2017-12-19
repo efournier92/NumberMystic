@@ -109,7 +109,7 @@ var mysticCtrl = function mysticCtrl($scope) {
   $scope.start = function () {
     $scope.step = 'getRangeInput';
     $scope.knownRange = new Range(0, 100);
-    $scope.askSingleNumber = false;
+    $scope.askingSingleNumber = false;
     $scope.questionCount = 0;
   };
 
@@ -126,7 +126,18 @@ var mysticCtrl = function mysticCtrl($scope) {
     $scope.step = 'chooseNumber';
   };
 
+  function checkSingleNumber() {}
+
   $scope.getNewRange = function (isWithinRange) {
+    $scope.questionCount += 1;
+    if ($scope.threeNumbersRemaining) {
+      if (isWithinRange) {
+        $scope.askingSingleNumber = true;
+      } else if (isWithinRange) {
+        $scope.finalAnswer = $scope.upperNumberRemaining;
+        $scope.step = 'showFinalAnswer';
+      }
+    }
     if (isWithinRange === undefined) {
       $scope.step = 'askQuestions';
       var middleNumber = findMiddleNumber($scope.knownRange);
@@ -135,27 +146,28 @@ var mysticCtrl = function mysticCtrl($scope) {
       $scope.knownRange = $scope.askRange;
       var _middleNumber = findMiddleNumber($scope.knownRange);
       $scope.askRange = new Range($scope.knownRange.min, _middleNumber);
-    } else {
+    } else if (!isWithinRange && !$scope.askingSingleNumber) {
       $scope.knownRange.min = $scope.askRange.max;
       var _middleNumber2 = findMiddleNumber($scope.knownRange);
-      $scope.askRange = new Range($scope.askRange.max, _middleNumber2);
+      $scope.askRange = new Range($scope.askRange.max + 1, _middleNumber2);
     }
 
-    if ($scope.askRange.max - $scope.askRange.min <= 1) {
-      if ($scope.knownRange.max === $scope.knownRange.min && isWithinRange === true) {
-        $scope.step = 'showFinalAnswer';
-        $scope.finalAnswer = $scope.knownRange.max;
-      } else if ($scope.knownRange.max === $scope.knownRange.min && isWithinRange === false) {
-        $scope.step = 'showFinalAnswer';
-        $scope.finalAnswer = $scope.knownRange.max - 1;
+    if ($scope.askingSingleNumber) {
+      $scope.questionCount -= 1;
+      $scope.step = 'showFinalAnswer';
+      if (isWithinRange) {
+        $scope.finalAnswer = $scope.upperNumberRemaining;
       } else {
-        $scope.askSingleNumber = true;
-        $scope.askRange.max = $scope.knownRange.max;
-        $scope.askRange.min = $scope.knownRange.max;
-        $scope.questionCount += 1;
+        $scope.finalAnswer = $scope.askRange.min;
       }
-    } else {
-      $scope.questionCount += 1;
+    }
+
+    if ($scope.askRange.max - $scope.askRange.min === 2) {
+      $scope.threeNumbersRemaining = true;
+      $scope.upperNumberRemaining = $scope.askRange.max;
+      $scope.askRange.max = $scope.askRange.min + 1;
+    } else if ($scope.askRange.max - $scope.askRange.min == 1) {
+      $scope.askingSingleNumber = true;
     }
   };
 };

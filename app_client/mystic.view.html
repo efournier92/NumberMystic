@@ -64,10 +64,10 @@
   <div class="main-sub-container" ng-show="step === 'askQuestions'">
     <div class="sub-text-container">
       <div class="form-group row">
-        <div class="prompt-text" class="col-sm-12" ng-show="!askSingleNumber">
+        <div class="prompt-text" class="col-sm-12" ng-show="!askingSingleNumber">
           Is your number between <b>{{askRange.min}}</b> &amp; <b>{{askRange.max}}</b>?
         </div>
-        <div class="prompt-text" class="col-sm-12" ng-show="askSingleNumber">
+        <div class="prompt-text" class="col-sm-12" ng-show="askingSingleNumber">
           Is your number <b>{{askRange.max}}</b>?
         </div>
       </div>
