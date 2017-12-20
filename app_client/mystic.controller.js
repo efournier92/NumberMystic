@@ -1,4 +1,4 @@
-const mysticCtrl = function mysticCtrl($scope) {
+const mysticCtrl = ($scope) => {
 
   class Range {
     constructor(min, max) {
@@ -13,15 +13,15 @@ const mysticCtrl = function mysticCtrl($scope) {
     )
   }
 
+  // maxQuestions = 1 + Floor(log2( range ))
   $scope.findMaxQuestions = () => {
-    // 1 + Floor(log2( n ))
     // find the number range
     let range = $scope.knownRange.max - $scope.knownRange.min;
     // calculate log base 2 of the range
     let numLog = Math.log2(range);
     // round down to nearest integer & add 1
     $scope.maxQuestions = Math.floor(numLog) + 1;
-    // validate range input
+    // ensure range input is valid integer
     if ($scope.maxQuestions === parseInt($scope.maxQuestions, 10)) {
       $scope.validInputRange = true; 
     } else {
@@ -29,6 +29,7 @@ const mysticCtrl = function mysticCtrl($scope) {
     }
   };
 
+  // set scope values to default
   $scope.start = () => {
     $scope.step = `getRangeInput`;
     $scope.knownRange = new Range(0, 100);
@@ -40,9 +41,18 @@ const mysticCtrl = function mysticCtrl($scope) {
   }
   $scope.start();
 
+  // find new range to ask user
   $scope.getNewRange = (isWithinRange) => {
     $scope.questionCount += 1;
 
+    // adjust askRange to half of knownRange
+    function adjustAskRange() {
+      let middleNumber = findMiddleNumber($scope.knownRange);
+      $scope.askRange = new Range($scope.knownRange.min, middleNumber);
+    }
+
+    // display answer
+    // once user number is known
     function showFinalAnswer() {
       $scope.step = `showFinalAnswer`;
       $scope.questionCount -= 1;
@@ -79,12 +89,6 @@ const mysticCtrl = function mysticCtrl($scope) {
         $scope.finalAnswer = $scope.upperOfThree;
         showFinalAnswer();
       }
-    }
-
-    function adjustAskRange() {
-      // adjust askRange to half of knownRange
-      let middleNumber = findMiddleNumber($scope.knownRange);
-      $scope.askRange = new Range($scope.knownRange.min, middleNumber);
     }
 
     // perform binary search procedure

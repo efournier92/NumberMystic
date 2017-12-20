@@ -106,15 +106,15 @@ var mysticCtrl = function mysticCtrl($scope) {
     return Math.floor((range.max + range.min) / 2);
   }
 
+  // maxQuestions = 1 + Floor(log2( range ))
   $scope.findMaxQuestions = function () {
-    // 1 + Floor(log2( n ))
     // find the number range
     var range = $scope.knownRange.max - $scope.knownRange.min;
     // calculate log base 2 of the range
     var numLog = Math.log2(range);
     // round down to nearest integer & add 1
     $scope.maxQuestions = Math.floor(numLog) + 1;
-    // validate range input
+    // ensure range input is valid integer
     if ($scope.maxQuestions === parseInt($scope.maxQuestions, 10)) {
       $scope.validInputRange = true;
     } else {
@@ -122,6 +122,7 @@ var mysticCtrl = function mysticCtrl($scope) {
     }
   };
 
+  // set scope values to default
   $scope.start = function () {
     $scope.step = "getRangeInput";
     $scope.knownRange = new Range(0, 100);
@@ -133,9 +134,18 @@ var mysticCtrl = function mysticCtrl($scope) {
   };
   $scope.start();
 
+  // find new range to ask user
   $scope.getNewRange = function (isWithinRange) {
     $scope.questionCount += 1;
 
+    // adjust askRange to half of knownRange
+    function adjustAskRange() {
+      var middleNumber = findMiddleNumber($scope.knownRange);
+      $scope.askRange = new Range($scope.knownRange.min, middleNumber);
+    }
+
+    // display answer
+    // once user number is known
     function showFinalAnswer() {
       $scope.step = "showFinalAnswer";
       $scope.questionCount -= 1;
@@ -172,12 +182,6 @@ var mysticCtrl = function mysticCtrl($scope) {
         $scope.finalAnswer = $scope.upperOfThree;
         showFinalAnswer();
       }
-    }
-
-    function adjustAskRange() {
-      // adjust askRange to half of knownRange
-      var middleNumber = findMiddleNumber($scope.knownRange);
-      $scope.askRange = new Range($scope.knownRange.min, middleNumber);
     }
 
     // perform binary search procedure
