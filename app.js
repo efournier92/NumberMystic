@@ -25,21 +25,13 @@ app.use(express.static(path.join(__dirname, `public`)));
 app.use(express.static(path.join(__dirname, `app_client`)));
 
 ///////////////////////////////////
-// ERROR HANDLERS
+// ERROR HANDLING
 //
 // Forward 404 to Error Handler
 app.use((req, res, next) => {
   var err = new Error(`Not Found`);
   err.status = 404;
   next(err);
-});
-
-// Unauthorised Errors
-app.use((err, req, res, next) => {
-  if (err.name === `UnauthorizedError`) {
-    res.status(401);
-    res.json({"message" : err.name + ": " + err.message});
-  }
 });
 
 // Dev Error Handler

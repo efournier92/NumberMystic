@@ -21,7 +21,7 @@ const mysticCtrl = function mysticCtrl($scope) {
     let numLog = Math.log2(range);
     // round down to nearest integer & add 1
     $scope.maxQuestions = Math.floor(numLog) + 1;
-
+    // validate range input
     if ($scope.maxQuestions === parseInt($scope.maxQuestions, 10)) {
       $scope.validInputRange = true; 
     } else {
@@ -34,6 +34,7 @@ const mysticCtrl = function mysticCtrl($scope) {
     $scope.knownRange = new Range(0, 100);
     $scope.validInputRange = true; 
     $scope.askingSingleNumber = false;
+    $scope.upperOfThree = undefined;
     $scope.findMaxQuestions();
     $scope.questionCount = 0;
   }
@@ -103,7 +104,7 @@ const mysticCtrl = function mysticCtrl($scope) {
       adjustAskRange();
     }
 
-    // narrow down final numbers
+    // efficiently narrow down the final numbers
     if ($scope.knownRange.max === $scope.knownRange.min) {
       // knownRange min & max are the same
       // user number has been found

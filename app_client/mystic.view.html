@@ -31,14 +31,17 @@
                  ng-change="findMaxQuestions()">
         </div>
       </div>
-      <div class="col-sm-12" ng-switch="validInputRange">
-        <button type="button" class="btn big-button input-button btn-danger"
-                              ng-switch-when="false">
-          Invalid Range
-        </button>
+      <div class="col-sm-12" ng-switch="validInputRange" ng-click="step = 'chooseNumber'">
+        <div ng-switch-when="false">
+          <button type="button"
+                  ng-disabled="true"
+                  class="btn big-button input-button btn-danger">
+            Invalid Range
+          </button>
+        </div>
         <div ng-switch-default>
-          <button type="button" class="btn big-button input-button btn-success" ng-click="step = 'chooseNumber'">
-            <!-- ng-switch-default> -->
+          <button type="button" 
+                  class="btn big-button input-button btn-success">
             Play With {{maxQuestions}} Questions
           </button>
         </div>
