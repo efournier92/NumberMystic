@@ -1,0 +1,130 @@
+<div id="main-container" class="container" style="line-height:40%">
+
+  <h1 id="header">
+    Number Mystic
+  </h1>
+
+  <div class="main-sub-container" ng-show="step === 'getRangeInput'">
+    <div class="sub-text-container">
+      <div class="form-group row">
+        <div class="prompt-text" class="col-sm-12" id="range-input-label">
+          Please Input a Number Range
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-4">
+          <input class="form-control form-control-lg number-input" 
+                 type="number"
+                 max="{{knownRange.max}}"
+                 min="0"
+                 ng-model="knownRange.min"
+                 ng-change="findMaxQuestions()">
+        </div>
+        <div id="range-dash" class="col-sm-2">
+          -
+        </div>
+        <div class="col-sm-4">
+          <input class="form-control form-control-lg number-input" 
+                 type="number"
+                 min="0"
+                 ng-model="knownRange.max"
+                 ng-change="findMaxQuestions()">
+        </div>
+      </div>
+      <div class="col-sm-12" ng-switch="validInputRange" ng-click="step = 'chooseNumber'">
+        <div ng-switch-when="false">
+          <button type="button"
+                  ng-disabled="true"
+                  class="btn big-button input-button btn-danger">
+            Invalid Range
+          </button>
+        </div>
+        <div ng-switch-default>
+          <button type="button" 
+                  class="btn big-button input-button btn-success">
+            Play With {{maxQuestions}} Questions
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-sub-container" ng-show="step === 'chooseNumber'">
+    <div class="sub-text-container">
+      <div class="form-group row">
+        <div class="prompt-text" class="col-sm-12">
+          Think of a number between 
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="prompt-text" class="col-sm-12">
+          <b>{{knownRange.min}} &amp; {{knownRange.max}}</b>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="prompt-text" class="col-sm-12">
+          I Can Find It In <b>{{maxQuestions}}</b> Questions or Less!
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <button type="button" class="btn big-button btn-warning" 
+                              ng-click="getNewRange()">
+          Okay
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-sub-container" ng-show="step === 'askQuestions'">
+    <div class="sub-text-container">
+      <div class="form-group row">
+        <div class="prompt-text" class="col-sm-12" ng-show="!askingSingleNumber">
+          Is your number between <b>{{askRange.min}}</b> &amp; <b>{{askRange.max}}</b>?
+        </div>
+        <div class="prompt-text" class="col-sm-12" ng-show="askingSingleNumber">
+          Is your number <b>{{askRange.min}}</b>?
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="prompt-text" class="col-sm-12">
+          <button type="button" class="btn btn-lg btn-success" 
+                                ng-click="getNewRange(true)">
+            Yes
+          </button>
+          <button type="button" class="btn btn-lg btn-danger" 
+                                ng-click="getNewRange(false)">
+            No
+          </button>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="prompt-text" class="col-sm-12">
+          Question {{questionCount}} of {{maxQuestions}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-sub-container" ng-show="step === 'showFinalAnswer'">
+    <div class="sub-text-container">
+      <div class="form-group row">
+        <div class="prompt-text" class="col-sm-12">
+          Your number is <b>{{finalAnswer}}</b><br />
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="prompt-text" class="col-sm-12">
+          It took me <b>{{questionCount}}</b> Questions
+        </div>
+      </div>
+      <div class="col-sm-12 row">
+        <button type="button" class="btn big-button btn-success" 
+                              ng-click="start()">
+          Try Again?
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
