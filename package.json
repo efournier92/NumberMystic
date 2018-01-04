@@ -1,31 +1,28 @@
 {
-  "name": "numberguesser",
-  "description": "UI to guess any number in n amount of tries.",
+  "name": "numberMystic",
+  "description": "Asks range questions to determine user's number in n amount of tries.",
   "version": "1.1.1",
   "main": "app.js",
   "engines": {
-    "node": "4.4.5"
+    "node": "6.11.3"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/efournier92/numberguesser.git"
+    "url": "git+https://github.com/efournier92/numbermystic.git"
   },
   "dependencies": {
-    "angular-gridster": "^0.13.14",
-    "angular-ui-bootstrap": "^2.5.0",
     "body-parser": "~1.10.2",
     "cookie-parser": "~1.3.3",
     "express": "~4.11.1",
-    "gulp-babel": "^6.1.2",
-    "gulp-imagemin": "^3.3.0",
-    "mongoose": "^4.1.2",
     "morgan": "~1.5.1",
-    "serve-favicon": "~2.2.0"
+    "serve-favicon": "~2.4.5"
   },
   "devDependencies": {
     "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
     "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-watch": "^4.3.11",
     "webpack-stream": "^4.0.0"
   },
   "scripts": {
@@ -34,7 +31,7 @@
   "author": "Eric Fournier",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/efournier92/numberguesser/issues"
+    "url": "https://github.com/efournier92/numbermystic/issues"
   },
-  "homepage": "https://github.com/efournier92/numberguesser#readme"
+  "homepage": "https://github.com/efournier92/numbermystic#readme"
 }
