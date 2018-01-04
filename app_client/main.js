@@ -1,18 +1,16 @@
-(function () {
+import { mysticCtrl } from `./mystic.controller.js`
 
-  angular.module('numberGuesser', ['ngRoute']);
+angular
+  .module('numberMystic', ['ngRoute'])
+  .config(['$routeProvider', config])
+  .controller('mysticCtrl', mysticCtrl);
 
-  function config($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'guesser.view.html',
-        controller: 'guesserCtrl',
-      })
-      .otherwise({redirectTo: '/'});
-  }
+function config($routeProvider) {
+  $routeProvider
+    .when('/', {
+      templateUrl: 'mystic.view.html',
+      controller: 'mysticCtrl',
+    })
+    .otherwise({redirectTo: '/'});
+}
 
-  angular
-    .module('numberGuesser')
-    .config(['$routeProvider', config]);
-
-})();
