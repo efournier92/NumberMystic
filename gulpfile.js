@@ -1,15 +1,15 @@
 // Core Dependencies
 const gulp = require('gulp');
-const path = require('path');
+var path = require('path');
 
 // Convert ES6 to ES5
-const webpack = require('webpack-stream');
-gulp.task('transpile-es6', () => {
+var webpack = require('webpack-stream');
+gulp.task('transpile-es6', function () {
   gulp.src('./app_client/main.js')
     .pipe(webpack({
       entry: './app_client/main.js',
       output: {
-        path: path.resolve(__dirname, './public/dist/'),
+        path: path.resolve(__dirname, './app_client/dist/'),
         filename: 'main.bundle.js'
       },
       module: {
@@ -25,14 +25,9 @@ gulp.task('transpile-es6', () => {
       },
       devtool: 'source-map'
     }))
-    .pipe(gulp.dest('./public/dist/'))
-});
-
-// Watch Files For Changes
-gulp.task('watch', function () {
-  gulp.watch('./app_client/*.js', ['transpile-es6']);
+    .pipe(gulp.dest('./app_client/dist/'))
 });
 
 // Default Task
-gulp.task('default', ['transpile-es6', 'watch']);
+gulp.task('default', ['transpile-es6']);
 
