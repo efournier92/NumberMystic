@@ -1,4 +1,4 @@
-import { mysticCtrl } from './mystic.controller.js';
+import { mysticCtrl } from './mystic.controller.js'
 
 angular
   .module(`numberMystic`, [`ngRoute`])
@@ -11,5 +11,6 @@ function config($routeProvider) {
       templateUrl: `mystic.view.html`,
       controller: `mysticCtrl`,
     })
+    .otherwise({redirectTo: `/`});
 }
 
