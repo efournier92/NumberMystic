@@ -13,6 +13,16 @@ const mysticCtrl = function mysticCtrl($scope) {
     )
   }
 
+  $scope.start = () => {
+    $scope.step = `getRangeInput`;
+    $scope.knownRange = new Range(0, 100);
+    $scope.askingSingleNumber = false;
+    // $scope.findMaxQuestions();
+    $scope.questionCount = 0;
+  }
+
+  $scope.start();
+
   $scope.findMaxQuestions = () => {
     // 1 + Floor(log2( n ))
     // find the number range
@@ -21,30 +31,14 @@ const mysticCtrl = function mysticCtrl($scope) {
     let numLog = Math.log2(range);
     // round down to nearest integer & add 1
     $scope.maxQuestions = Math.floor(numLog) + 1;
-    // validate range input
-    if ($scope.maxQuestions === parseInt($scope.maxQuestions, 10)) {
-      $scope.validInputRange = true; 
-    } else {
-      $scope.validInputRange = false; 
-    }
+    $scope.step = `chooseNumber`;
   };
-
-  $scope.start = () => {
-    $scope.step = `getRangeInput`;
-    $scope.knownRange = new Range(0, 100);
-    $scope.validInputRange = true; 
-    $scope.askingSingleNumber = false;
-    $scope.upperOfThree = undefined;
-    $scope.findMaxQuestions();
-    $scope.questionCount = 0;
-  }
-  $scope.start();
 
   $scope.getNewRange = (isWithinRange) => {
     $scope.questionCount += 1;
 
     function showFinalAnswer() {
-      $scope.step = `showFinalAnswer`;
+      $scope.step = 'showFinalAnswer';
       $scope.questionCount -= 1;
     }
 
@@ -86,7 +80,7 @@ const mysticCtrl = function mysticCtrl($scope) {
       let middleNumber = findMiddleNumber($scope.knownRange);
       $scope.askRange = new Range($scope.knownRange.min, middleNumber);
     }
-
+    
     // perform binary search procedure
     if (isWithinRange === undefined) {
       // start asking questions
@@ -103,13 +97,13 @@ const mysticCtrl = function mysticCtrl($scope) {
       $scope.knownRange.min = $scope.askRange.max + 1;
       adjustAskRange();
     }
-
-    // efficiently narrow down the final numbers
+    
+    // narrow down final numbers
     if ($scope.knownRange.max === $scope.knownRange.min) {
       // knownRange min & max are the same
       // user number has been found
       $scope.finalAnswer = $scope.askRange.max;
-      $scope.step = `showFinalAnswer`;
+      $scope.step = 'showFinalAnswer';
     } else if ($scope.knownRange.max - $scope.knownRange.min === 2) {
       // knownRange contains 3 potential answers
       // adjust askRange to, at max, ask 2 more questions

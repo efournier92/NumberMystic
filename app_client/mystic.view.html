@@ -7,43 +7,34 @@
   <div class="main-sub-container" ng-show="step === 'getRangeInput'">
     <div class="sub-text-container">
       <div class="form-group row">
-        <div class="prompt-text" class="col-sm-12" id="range-input-label">
+        <div class="prompt-text" class="col-sm-12">
           Please Input a Number Range
         </div>
       </div>
       <div class="form-group">
-        <div class="col-sm-4">
-          <input class="form-control form-control-lg number-input" 
-                 type="number"
-                 max="{{knownRange.max}}"
-                 min="0"
-                 ng-model="knownRange.min"
-                 ng-change="findMaxQuestions()">
+        <div class="col-sm-4 col-sm-offset-1 align-middle">
+          <input type="number" class="form-control form-control-lg" 
+                               ng-model="knownRange.min"
+                               ng-change="findMaxQuestions()">
         </div>
-        <div id="range-dash" class="col-sm-2">
+        <div id="form-dash" class="col-sm-2">
           -
         </div>
         <div class="col-sm-4">
-          <input class="form-control form-control-lg number-input" 
+          <input class="form-control form-control-lg" 
                  type="number"
-                 min="0"
                  ng-model="knownRange.max"
                  ng-change="findMaxQuestions()">
         </div>
       </div>
-      <div class="col-sm-12" ng-switch="validInputRange" ng-click="step = 'chooseNumber'">
-        <div ng-switch-when="false">
-          <button type="button"
-                  ng-disabled="true"
-                  class="btn big-button input-button btn-danger">
-            Invalid Range
-          </button>
-        </div>
-        <div ng-switch-default>
-          <button type="button" 
-                  class="btn big-button input-button btn-success">
-            Play With {{maxQuestions}} Questions
-          </button>
+      <div class="col-sm-12">
+        <button type="button" class="btn big-button btn-success" 
+                              style="width:61%"
+                              ng-click="step = 'chooseNumber'">
+          Begin
+        </button>
+        <div id="guess-estimate" class="col-sm-12">
+          Let's Play <b>{{maxQuestions}} Questions</b>!
         </div>
       </div>
     </div>
