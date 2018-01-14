@@ -7,15 +7,14 @@
   <div class="main-sub-container" ng-show="step === 'getRangeInput'">
     <div class="sub-text-container">
       <div class="form-group row">
-        <div class="prompt-text" class="col-sm-12" id="range-input-label">
+        <div class="prompt-text" class="col-sm-12">
           Please Input a Number Range
         </div>
       </div>
       <div class="form-group">
         <div class="col-sm-4 col-sm-offset-1 align-middle">
           <input type="number" class="form-control form-control-lg" 
-                               ng-model="knownRange.min"
-                               ng-change="findMaxQuestions()">
+                               ng-model="knownRange.min">
         </div>
         <div id="form-dash" class="col-sm-2">
           -
@@ -23,15 +22,14 @@
         <div class="col-sm-4">
           <input class="form-control form-control-lg" 
                  type="number"
-                 ng-model="knownRange.max"
-                 ng-change="findMaxQuestions()">
+                 ng-model="knownRange.max">
         </div>
       </div>
       <div class="col-sm-12">
         <button type="button" class="btn big-button btn-success" 
                               style="width:61%"
-                              ng-click="step = 'chooseNumber'">
-          Play With {{maxQuestions}} Questions</b>
+                              ng-click="calcMaxQuestions()">
+          Begin
         </button>
       </div>
     </div>
