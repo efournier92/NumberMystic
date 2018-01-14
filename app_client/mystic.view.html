@@ -7,7 +7,7 @@
   <div class="main-sub-container" ng-show="step === 'getRangeInput'">
     <div class="sub-text-container">
       <div class="form-group row">
-        <div class="prompt-text" class="col-sm-12">
+        <div class="prompt-text" class="col-sm-12" id="range-input-label">
           Please Input a Number Range
         </div>
       </div>
@@ -31,11 +31,8 @@
         <button type="button" class="btn big-button btn-success" 
                               style="width:61%"
                               ng-click="step = 'chooseNumber'">
-          Begin
+          Play With {{maxQuestions}} Questions</b>
         </button>
-        <div id="guess-estimate" class="col-sm-12">
-          Let's Play <b>{{maxQuestions}} Questions</b>!
-        </div>
       </div>
     </div>
   </div>

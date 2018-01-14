@@ -36,9 +36,8 @@ b {
   border: solid 2px #a7adba;
 }
 
-#guess-estimate {
-  margin-top: 11px;
-  font-size: 12px;
+#range-input-label {
+  margin-bottom: 12px;
 }
 
 #form-dash {
