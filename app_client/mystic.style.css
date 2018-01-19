@@ -36,13 +36,8 @@ b {
   border: solid 2px #a7adba;
 }
 
-#range-input-label {
-  margin-bottom: 12px;
-}
-
-#range-dash {
+#form-dash {
   margin-top: 11px;
-  margin-left: 28px;
   font-size: 32px;
 }
 
@@ -71,7 +66,7 @@ b {
 }
 
 .number-input {
-  width: 120px;
+  width: 160px;
 }
 
 .big-button {
