@@ -1,7 +1,6 @@
 # Number Mystic
 ### [numberMystic.herokuapp.com](http://numbermystic.herokuapp.com/#/)
 
-
 ## Purpose
 
 * Application to determine a user's number in `n` questions, by asking binary range questions.
