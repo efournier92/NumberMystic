@@ -106,17 +106,7 @@ var mysticCtrl = function mysticCtrl($scope) {
     return Math.floor((range.max + range.min) / 2);
   }
 
-  $scope.start = function () {
-    $scope.step = 'getRangeInput';
-    $scope.knownRange = new Range(0, 100);
-    $scope.askingSingleNumber = false;
-    $scope.upperOfThree = undefined;
-    $scope.questionCount = 0;
-  };
-
-  $scope.start();
-
-  $scope.calcMaxQuestions = function () {
+  $scope.findMaxQuestions = function () {
     // 1 + Floor(log2( n ))
     // find the number range
     var range = $scope.knownRange.max - $scope.knownRange.min;
@@ -124,29 +114,46 @@ var mysticCtrl = function mysticCtrl($scope) {
     var numLog = Math.log2(range);
     // round down to nearest integer & add 1
     $scope.maxQuestions = Math.floor(numLog) + 1;
-    $scope.step = 'chooseNumber';
+
+    if ($scope.maxQuestions === parseInt($scope.maxQuestions, 10)) {
+      $scope.validInputRange = true;
+    } else {
+      $scope.validInputRange = false;
+    }
   };
 
-  function checkSingleNumber() {}
+  $scope.start = function () {
+    $scope.step = "getRangeInput";
+    $scope.knownRange = new Range(0, 100);
+    $scope.askingSingleNumber = false;
+    $scope.findMaxQuestions();
+    $scope.questionCount = 0;
+  };
+  $scope.start();
 
   $scope.getNewRange = function (isWithinRange) {
     $scope.questionCount += 1;
 
     function showFinalAnswer() {
-      $scope.step = 'showFinalAnswer';
+      $scope.step = "showFinalAnswer";
       $scope.questionCount -= 1;
     }
 
     if ($scope.knownRange.max === $scope.knownRange.min) {
+      // knownRange min & max are the same
+      // user number has been found
       $scope.finalAnswer = $scope.askRange.max;
       showFinalAnswer();
       return;
     }
 
     if ($scope.askingSingleNumber) {
+      // knownRange contains 2 potential answers
       if (isWithinRange) {
+        // user number is the one he/she was presented
         $scope.finalAnswer = $scope.askRange.min;
       } else {
+        // user number is the other one, which he/she was not presented
         $scope.finalAnswer = $scope.askRange.max;
       }
       showFinalAnswer();
@@ -154,15 +161,19 @@ var mysticCtrl = function mysticCtrl($scope) {
     }
 
     if ($scope.upperOfThree) {
+      // knownRange contains 3 potential answers
       if (isWithinRange) {
+        // knownRange contains 2 potential answers
         $scope.askingSingleNumber = true;
       } else {
+        // user number is the 3rd potential answer
         $scope.finalAnswer = $scope.upperOfThree;
         showFinalAnswer();
       }
     }
 
     function adjustAskRange() {
+      // adjust askRange to half of knownRange
       var middleNumber = findMiddleNumber($scope.knownRange);
       $scope.askRange = new Range($scope.knownRange.min, middleNumber);
     }
@@ -170,7 +181,7 @@ var mysticCtrl = function mysticCtrl($scope) {
     // perform binary search procedure
     if (isWithinRange === undefined) {
       // start asking questions
-      $scope.step = 'askQuestions';
+      $scope.step = "askQuestions";
       adjustAskRange();
     } else if (isWithinRange) {
       // user inputed TRUE
@@ -189,7 +200,7 @@ var mysticCtrl = function mysticCtrl($scope) {
       // knownRange min & max are the same
       // user number has been found
       $scope.finalAnswer = $scope.askRange.max;
-      $scope.step = 'showFinalAnswer';
+      $scope.step = "showFinalAnswer";
     } else if ($scope.knownRange.max - $scope.knownRange.min === 2) {
       // knownRange contains 3 potential answers
       // adjust askRange to, at max, ask 2 more questions

@@ -13,17 +13,7 @@ const mysticCtrl = function mysticCtrl($scope) {
     )
   }
 
-  $scope.start = () => {
-    $scope.step = `getRangeInput`;
-    $scope.knownRange = new Range(0, 100);
-    $scope.askingSingleNumber = false;
-    $scope.upperOfThree = undefined;
-    $scope.questionCount = 0;
-  }
-
-  $scope.start();
-
-  $scope.calcMaxQuestions = () => {
+  $scope.findMaxQuestions = () => {
     // 1 + Floor(log2( n ))
     // find the number range
     let range = $scope.knownRange.max - $scope.knownRange.min;
@@ -31,50 +21,70 @@ const mysticCtrl = function mysticCtrl($scope) {
     let numLog = Math.log2(range);
     // round down to nearest integer & add 1
     $scope.maxQuestions = Math.floor(numLog) + 1;
-    $scope.step = `chooseNumber`;
+
+    if ($scope.maxQuestions === parseInt($scope.maxQuestions, 10)) {
+      $scope.validInputRange = true; 
+    } else {
+      $scope.validInputRange = false; 
+    }
   };
 
-  function checkSingleNumber() {
+  $scope.start = () => {
+    $scope.step = `getRangeInput`;
+    $scope.knownRange = new Range(0, 100);
+    $scope.askingSingleNumber = false;
+    $scope.findMaxQuestions();
+    $scope.questionCount = 0;
   }
+  $scope.start();
 
   $scope.getNewRange = (isWithinRange) => {
     $scope.questionCount += 1;
 
     function showFinalAnswer() {
-      $scope.step = 'showFinalAnswer';
+      $scope.step = `showFinalAnswer`;
       $scope.questionCount -= 1;
     }
 
     if ($scope.knownRange.max === $scope.knownRange.min) {
+      // knownRange min & max are the same
+      // user number has been found
       $scope.finalAnswer = $scope.askRange.max;
       showFinalAnswer();
       return;
     }
 
     if ($scope.askingSingleNumber) {
+      // knownRange contains 2 potential answers
       if (isWithinRange) {
+        // user number is the one he/she was presented
         $scope.finalAnswer = $scope.askRange.min;
       } else {
+        // user number is the other one, which he/she was not presented
         $scope.finalAnswer = $scope.askRange.max;
       }
       showFinalAnswer();
       return;
     }
 
-    if ($scope.upperOfThree) { 
+    if ($scope.upperOfThree) {
+      // knownRange contains 3 potential answers
       if (isWithinRange) {
+        // knownRange contains 2 potential answers
         $scope.askingSingleNumber = true;  
       } else {
+        // user number is the 3rd potential answer
         $scope.finalAnswer = $scope.upperOfThree;
         showFinalAnswer();
       }
     }
 
     function adjustAskRange() {
+      // adjust askRange to half of knownRange
       let middleNumber = findMiddleNumber($scope.knownRange);
       $scope.askRange = new Range($scope.knownRange.min, middleNumber);
     }
-    
+
     // perform binary search procedure
     if (isWithinRange === undefined) {
       // start asking questions
@@ -91,13 +101,13 @@ const mysticCtrl = function mysticCtrl($scope) {
       $scope.knownRange.min = $scope.askRange.max + 1;
       adjustAskRange();
     }
-    
+
     // narrow down final numbers
     if ($scope.knownRange.max === $scope.knownRange.min) {
       // knownRange min & max are the same
       // user number has been found
       $scope.finalAnswer = $scope.askRange.max;
-      $scope.step = 'showFinalAnswer';
+      $scope.step = `showFinalAnswer`;
     } else if ($scope.knownRange.max - $scope.knownRange.min === 2) {
       // knownRange contains 3 potential answers
       // adjust askRange to, at max, ask 2 more questions
