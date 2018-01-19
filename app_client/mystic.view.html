@@ -12,19 +12,19 @@
         </div>
       </div>
       <div class="form-group">
-        <div class="col-sm-4 col-sm-offset-1 align-middle">
-          <input class="form-control form-control-lg" 
+        <div class="col-sm-4">
+          <input class="form-control form-control-lg number-input" 
                  type="number"
                  max="{{knownRange.max}}"
                  min="0"
                  ng-model="knownRange.min"
                  ng-change="findMaxQuestions()">
         </div>
-        <div id="form-dash" class="col-sm-2">
+        <div id="range-dash" class="col-sm-2">
           -
         </div>
         <div class="col-sm-4">
-          <input class="form-control form-control-lg" 
+          <input class="form-control form-control-lg number-input" 
                  type="number"
                  min="0"
                  ng-model="knownRange.max"
@@ -32,14 +32,11 @@
         </div>
       </div>
       <div class="col-sm-12" ng-switch="validInputRange">
-        <button type="button" class="btn big-button btn-danger" 
-                              style="width:61%"
-                              ng-disabled="false"
-                              ng-switch-when="true">
+        <button type="button" class="btn big-button input-button btn-danger"
+                              ng-switch-when="false">
           Invalid Range
         </button>
-        <button type="button" class="btn big-button btn-success" 
-                              style="width:61%"
+        <button type="button" class="btn big-button input-button btn-success in"
                               ng-click="step = 'chooseNumber'"
                               ng-switch-default>
           Play With {{maxQuestions}} Questions
