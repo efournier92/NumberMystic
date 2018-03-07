@@ -1,11 +1,13 @@
 const mysticCtrl = function mysticCtrl($scope) {
+
   class Range {
     constructor(min, max) {
       this.min = min;
       this.max = max;
     }
   }
-$scope.calcMaxQuestions
+
+  $scope.calcMaxQuestions
   function findMiddleNumber(range) {
     return Math.floor(
       (range.max + range.min) / 2
