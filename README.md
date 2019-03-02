@@ -1,6 +1,4 @@
-# ![NumberMystic](
-
-)
+# ![NumberMystic](https://github.com/efournier92/numbermystic/blob/master/img/logo/NumberMystic_Logo.png?raw=true)
 
 ## Contents
 - [Overview](#overview)
