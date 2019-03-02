@@ -1,4 +1,4 @@
-# ![NumberMystic](https://github.com/efournier92/numbermystic/blob/master/img/logo/NumberMystic_Logo.png?raw=true)
+# ![NumberMystic](https://github.com/efournier92/numberMystic/blob/master/public/img/logo/NumberMystic_Logo.png?raw=true)
 
 ## Contents
 - [Overview](#overview)
@@ -6,9 +6,7 @@
 - [Features](#features)
 - [Development Philosophy](#development-philosophy)
 - [Stack](#stack)
-- [Configuration](#configuration)
 - [Building](#building)
-- [Testing](#testing)
 - [Contributing](#contributing)
 - [Licensing](#licensing)
 
@@ -22,6 +20,14 @@
 
 ## Features
 
+![Number Range Screen](https://github.com/efournier92/numbermystic/blob/master/img/logo/01_NumberRange.png?raw=true)
+
+![Think of a Number Screen](https://github.com/efournier92/numbermystic/blob/master/img/logo/02_ThinkOfANumber.png?raw=true)
+
+![Range Question Screen](https://github.com/efournier92/numbermystic/blob/master/img/logo/03_RangeQuestion.png?raw=true)
+
+![Screen](https://github.com/efournier92/numbermystic/blob/master/img/logo/04_Answer.png?raw=true)
+
 ## Development Philosophy
 
 ## Stack
@@ -33,11 +39,10 @@
 - Babel
 - WebPack
 
-## Configuration
-
 ## Building
-
-## Testing
+- `npm install --save`
+- `gulp`
+- `nodemon app.js`
 
 ## Contributing
 If you have feature suggestions, please contact me here or at efournier92@gmail.com. If you'd like to submit a pull request, please feel free to, and I'll review merge it at my earliest convenience!

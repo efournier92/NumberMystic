@@ -102,6 +102,7 @@ var mysticCtrl = function mysticCtrl($scope) {
     this.max = max;
   };
 
+  $scope.calcMaxQuestions;
   function findMiddleNumber(range) {
     return Math.floor((range.max + range.min) / 2);
   }
