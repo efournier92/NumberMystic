@@ -11,24 +11,23 @@
 - [Licensing](#licensing)
 
 ## Overview
-* Application to determine a user's number in `n` questions, by asking binary range questions.
-* `n` is calculated with the formula `1 + Floor(log2( n ))`.
-* Based on binary search laws, the app will never require more than the allotted guesses to determine the user's number.
+This application is meant to determine a user's number in `n` questions, by asking a sequence of binary range questions. The user is prompted to choose a number range, then to think of a number within that range. The maximum number of questions it will take is a calculated as `n`, with the formula `1 + Floor(log2( n ))`. Based on binary search laws, the it will never require more than the allotted guesses to determine the user's number.
 
 ## Demo
 [numberMystic.herokuapp.com](http://numbermystic.herokuapp.com/#/)
 
 ## Features
 
-![Number Range Screen](https://github.com/efournier92/numbermystic/blob/master/img/logo/01_NumberRange.png?raw=true)
+![Number Range Screen](https://github.com/efournier92/numbermystic/blob/master/public/img/logo/01_NumberRange.png?raw=true)
 
-![Think of a Number Screen](https://github.com/efournier92/numbermystic/blob/master/img/logo/02_ThinkOfANumber.png?raw=true)
+![Think of a Number Screen](https://github.com/efournier92/numbermystic/blob/master/public/img/logo/02_ThinkOfANumber.png?raw=true)
 
-![Range Question Screen](https://github.com/efournier92/numbermystic/blob/master/img/logo/03_RangeQuestion.png?raw=true)
+![Range Question Screen](https://github.com/efournier92/numbermystic/blob/master/public/img/logo/03_RangeQuestion.png?raw=true)
 
-![Screen](https://github.com/efournier92/numbermystic/blob/master/img/logo/04_Answer.png?raw=true)
+![Screen](https://github.com/efournier92/numbermystic/blob/master/public/img/logo/04_Answer.png?raw=true)
 
 ## Development Philosophy
+I built this as an excuse to play around with binary search, as well as to hone my skills with AngularJS. It's a simple application I didn't spend much time on, and as such is one of my first attempt at rapid interface development. It's a pure SPA, built with four view modes displayed as a sequence of prompts. I wrote the binary search algorithm without referencing any other solutions. After much tweaking and manual testing, I believe it can _always_ find your number within the allotted number of questions.
 
 ## Stack
 - NodeJS

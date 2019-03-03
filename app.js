@@ -18,7 +18,7 @@ app.use(cookieParser());
 
 // Serve Fav Icon
 const favicon = require(`serve-favicon`);
-app.use(favicon(__dirname + `/public/mystic.png`));
+app.use(favicon(__dirname + `/public/img/logo/NumberMystic_Icon.png`));
 
 // Static Resources
 app.use(express.static(path.join(__dirname, `public`)));
@@ -38,7 +38,7 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   if (err.name === `UnauthorizedError`) {
     res.status(401);
-    res.json({"message" : err.name + ": " + err.message});
+    res.json({ "message": err.name + ": " + err.message });
   }
 });
 
