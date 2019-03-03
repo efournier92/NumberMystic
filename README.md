@@ -18,13 +18,17 @@ This application is meant to determine a user's number in `n` questions, by aski
 
 ## Features
 
-![Number Range Screen](https://github.com/efournier92/numbermystic/blob/master/public/img/logo/01_NumberRange.png?raw=true)
+### Choose a number range
+![Number Range Screen](https://github.com/efournier92/numbermystic/blob/master/public/img/screenshots/01_NumberRange.png?raw=true)
 
-![Think of a Number Screen](https://github.com/efournier92/numbermystic/blob/master/public/img/logo/02_ThinkOfANumber.png?raw=true)
+### Think of a Number
+![Think of a Number Screen](https://github.com/efournier92/numbermystic/blob/master/public/img/screenshots/02_ThinkOfANumber.png?raw=true)
 
-![Range Question Screen](https://github.com/efournier92/numbermystic/blob/master/public/img/logo/03_RangeQuestion.png?raw=true)
+#### Binary Range Question
+![Range Question Screen](https://github.com/efournier92/numbermystic/blob/master/public/img/screenshots/03_RangeQuestion.png?raw=true)
 
-![Screen](https://github.com/efournier92/numbermystic/blob/master/public/img/logo/04_Answer.png?raw=true)
+### Final Answer
+![Screen](https://github.com/efournier92/numbermystic/blob/master/public/img/screenshots/04_Answer.png?raw=true)
 
 ## Development Philosophy
 I built this as an excuse to play around with binary search, as well as to hone my skills with AngularJS. It's a simple application I didn't spend much time on, and as such is one of my first attempt at rapid interface development. It's a pure SPA, built with four view modes displayed as a sequence of prompts. I wrote the binary search algorithm without referencing any other solutions. After much tweaking and manual testing, I believe it can _always_ find your number within the allotted number of questions.
